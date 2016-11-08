@@ -1,6 +1,17 @@
 var appTest = angular.module("testApp", ["ngRoute"]);
 
-appTest.controller("testController", function($scope) {
+angular.module("testApp").config(function($routeProvider) {
+    $routeProvider.when('/aide', {
+        templateUrl: "app/views/aide.html"
+    }).when('/', {
+        templateUrl: "app/views/client.html"
+    }).when('/client', {
+        templateUrl: "app/views/client.html"
+    });
+
+});
+
+angular.module("testApp").controller("testController", function($scope) {
         $scope.titre = "Formation Angular"
         $scope.client = {
             name: '',
@@ -128,12 +139,12 @@ appTest.controller("testController", function($scope) {
             return isDisable;
         };
 
-        var showUpdateClient=false;
-        $scope.showUpdateClient = function(){
-          showUpdateClient = true;
+        var showUpdateClient = false;
+        $scope.showUpdateClient = function() {
+            showUpdateClient = true;
         };
 
-        $scope.getShowUpdateClient = function(){
+        $scope.getShowUpdateClient = function() {
             return showUpdateClient;
         };
 
@@ -153,13 +164,13 @@ appTest.controller("testController", function($scope) {
     })
     .controller("menuController", function($scope) {
         $scope.menus = [{
-            url: "#",
+            url: "#/",
             label: "Accueil"
         }, {
-            url: "#",
+            url: "#/client",
             label: "Clients"
         }, {
-            url: "#",
+            url: "#/aide",
             label: "Aide"
         }];
     })

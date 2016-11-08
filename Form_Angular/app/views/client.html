@@ -1,0 +1,62 @@
+<div ng-controller="testController">
+    <h1>{{titre}}</h1>
+    <input type="text" ng-model="search"> Nombre de résultat : {{clientsFiltered.length}} / {{clients.length}}
+    <!-- <select ng-model="searchWork"> -->
+    <!-- <option></option> -->
+    <!-- <option ng-repeat="client in clients | orderBy:'work'">{{ client.work }}</option> -->
+    <!-- </select> -->
+    <div ng-controller="addClientController">
+        <button class="btn btn-primary" ng-click="showHideClient();">Ajout Client</button>
+        <div ng-show="getVisible()">
+            <input type="text" placeholder="Nom" ng-model="client.nom">
+            <input type="text" placeholder="Prenom" ng-model="client.name">
+            <input type="text" placeholder="Age" ng-model="client.age">
+            <input type="text" placeholder="Entreprise" ng-model="client.work">
+            <button ng-click="saveClient()" class="btn btn-primary btn-xs" ng-disabled="isDisable()">Enregistrer</button>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <th></th>
+            <th>Tête</th>
+            <th class="clicable" ng-click="orderBy('nom')">Nom</th>
+            <th class="clicable" ng-click="orderBy('name')">Prenom</th>
+            <th class="clicable" ng-click="orderBy('age')">Age</th>
+            <th class="clicable" ng-click="orderBy('work')">Entreprise</th>
+            <th>Action</th>
+        </thead>
+        <tr ng-repeat="client in clientsFiltered = (clients | filter:{name:search}) | orderBy:getOrder()" ng-class="plusJeune(client.age)">
+            <td>
+                {{$index + 1}}
+            </td>
+            <td>
+                <img class="clientImage" ng-src="app/css/img/{{client.img}}.jpg" alt="" />
+            </td>
+            <td>
+                <div>{{client.nom}}</div>
+                <!-- <div ng-hide="getShowUpdateClient()">{{client.nom}}</div> -->
+                <!-- <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.nom}}> -->
+            </td>
+            <td>
+                <div ng-hide="getShowUpdateClient()">{{client.name}}</div>
+                <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.name}}>
+            </td>
+            <td>
+                <div ng-hide="getShowUpdateClient()">{{ client.age}} ans </div>
+                <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.age}}>
+            </td>
+            <td>
+                <div ng-hide="getShowUpdateClient()">{{ client.work}}</div>
+                <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.work}}>
+            </td>
+            <td>
+                <button ng-hide="getShowUpdateClient()" class="btn btn-primary btn-xs" type="button" ng-click="showUpdateClient()">Modifier</button>
+                <button ng-hide="getShowUpdateClient()" class="btn btn-danger btn-xs" type="button" ng-click="removeClient(client)">Supprimer</button>
+                <button ng-show="getShowUpdateClient()" class="btn btn-primary btn-xs" type="button" ng-click="updateClient()">Modifier</button>
+            </td>
+        </tr>
+    </table>
+
+    <!-- <input type="button" ng-click="plusJeune();" ng-init="count=1" value="plusJeune"> -->
+</div>
