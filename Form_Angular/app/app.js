@@ -1,4 +1,4 @@
-var appTest = angular.module("testApp", []);
+var appTest = angular.module("testApp", ["ngRoute"]);
 
 appTest.controller("testController", function($scope) {
         $scope.titre = "Formation Angular"
