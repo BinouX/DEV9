@@ -1,4 +1,4 @@
-<div ng-controller="testController">
+<div>
     <h1>{{titre}}</h1>
     <input type="text" ng-model="search"> Nombre de résultat : {{clientsFiltered.length}} / {{clients.length}}
     <!-- <select ng-model="searchWork"> -->
@@ -27,34 +27,36 @@
             <th>Action</th>
         </thead>
         <tr ng-repeat="client in clientsFiltered = (clients | filter:{name:search}) | orderBy:getOrder()" ng-class="plusJeune(client.age)">
-            <td>
-                {{$index + 1}}
-            </td>
-            <td>
-                <img class="clientImage" ng-src="app/css/img/{{client.img}}.jpg" alt="" />
-            </td>
-            <td>
-                <div>{{client.nom}}</div>
-                <!-- <div ng-hide="getShowUpdateClient()">{{client.nom}}</div> -->
-                <!-- <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.nom}}> -->
-            </td>
-            <td>
-                <div ng-hide="getShowUpdateClient()">{{client.name}}</div>
-                <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.name}}>
-            </td>
-            <td>
-                <div ng-hide="getShowUpdateClient()">{{ client.age}} ans </div>
-                <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.age}}>
-            </td>
-            <td>
-                <div ng-hide="getShowUpdateClient()">{{ client.work}}</div>
-                <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.work}}>
-            </td>
-            <td>
-                <button ng-hide="getShowUpdateClient()" class="btn btn-primary btn-xs" type="button" ng-click="showUpdateClient()">Modifier</button>
-                <button ng-hide="getShowUpdateClient()" class="btn btn-danger btn-xs" type="button" ng-click="removeClient(client)">Supprimer</button>
-                <button ng-show="getShowUpdateClient()" class="btn btn-primary btn-xs" type="button" ng-click="updateClient()">Modifier</button>
-            </td>
+                <td>
+                    {{$index + 1}}
+                </td>
+                <td>
+                    <img class="clientImage" ng-src="app/css/img/{{client.img}}.jpg" alt="" />
+                </td>
+                <td>
+                    <div>{{client.nom}}</div>
+                    <!-- <div ng-hide="getShowUpdateClient()">{{client.nom}}</div> -->
+                    <!-- <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.nom}}> -->
+                </td>
+                <td>
+                    <div ng-hide="getShowUpdateClient()">{{client.name}}</div>
+                    <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.name}}>
+                </td>
+                <td>
+                    <div ng-hide="getShowUpdateClient()">{{ client.age}} ans </div>
+                    <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.age}}>
+                </td>
+                <td>
+                    <div ng-hide="getShowUpdateClient()">{{ client.work}}</div>
+                    <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.work}}>
+                </td>
+                <td>
+                    <button ng-hide="getShowUpdateClient()" class="btn btn-primary btn-xs" type="button" ng-click="showUpdateClient()">Modifier</button>
+                    <button ng-hide="getShowUpdateClient()" class="btn btn-danger btn-xs" type="button" ng-click="removeClient(client)">Supprimer</button>
+                    <button ng-show="getShowUpdateClient()" class="btn btn-primary btn-xs" type="button" ng-click="updateClient()">Modifier</button>
+                    <a class="btn btn-primary btn-xs" href="#/client/{{client.name}}">Detail</a>
+                </td>
+
         </tr>
     </table>
 

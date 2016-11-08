@@ -2,16 +2,26 @@ var appTest = angular.module("testApp", ["ngRoute"]);
 
 angular.module("testApp").config(function($routeProvider) {
     $routeProvider.when('/aide', {
-        templateUrl: "app/views/aide.html"
-    }).when('/', {
-        templateUrl: "app/views/client.html"
-    }).when('/client', {
-        templateUrl: "app/views/client.html"
-    });
-
+            templateUrl: "app/views/aide.html",
+            controller: "chuckNorrisController"
+        }).when('/', {
+            templateUrl: "app/views/client.html",
+            controller: "testController"
+        }).when('/client/:name', {
+            templateUrl: "app/views/infoClient.html",
+            controller: "clientController"
+        })
+        .when('/client', {
+            templateUrl: "app/views/client.html",
+            controller: "testController"
+        }).otherwise({
+            templateUrl: "app/views/404.html"
+        });
 });
 
-angular.module("testApp").controller("testController", function($scope) {
+angular.module("testApp").constant("AUTHOR", "Picitime");
+
+angular.module("testApp").controller("testController", function($scope, $rootScope) {
         $scope.titre = "Formation Angular"
         $scope.client = {
             name: '',
@@ -20,7 +30,7 @@ angular.module("testApp").controller("testController", function($scope) {
             work: '',
             img: 'mystere'
         };
-        $scope.clients = [{
+        $rootScope.clients = [{
             name: 'Binoux',
             nom: 'Liebaert',
             age: 22,
@@ -183,4 +193,8 @@ angular.module("testApp").controller("testController", function($scope) {
         $scope.getVisible = function() {
             return isVisible;
         };
+    })
+    .controller("clientController", function($scope, $routeParams, $rootScope, AUTHOR) {
+      $scope.auteur = AUTHOR;
+      $scope.client = $routeParams;
     });
