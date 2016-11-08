@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>FormationAng</title>
+    <script src="./vendor/js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="./vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./app/css/style.css">
+</head>
+
+<body>
+    <nav ng-controller="menuController">
+        <ul class="nav nav-tabs">
+            <li ng-repeat="menu in menus">
+                <a href="{{menu.url}}">{{menu.label}}</a>
+            </li>
+        </ul>
+    </nav>
+    <div ng-controller="testController">
+        <h1>{{titre}}</h1>
+        <input type="text" ng-model="search">
+        <select ng-model="searchWork">
+          <option></option>
+          <option ng-repeat="client in clients | orderBy:'work'">{{ client.work }}</option>
+        </select>
+
+        <div ng-controller="addClientController" >
+            <button class="btn btn-primary" ng-click="showHideClient();">Ajout Client</button>
+            <div ng-show="getVisible()">
+                <input type="text" placeholder="Nom" ng-model="client.nom">
+                <input type="text" placeholder="Prenom" ng-model="client.name">
+                <input type="text" placeholder="Age" ng-model="client.age">
+                <input type="text" placeholder="Entreprise" ng-model="client.work">
+                <button ng-click="saveClient()" class="btn btn-primary btn-xs" ng-disabled="isDisable()">Enregistrer</button>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <th class="clicable" ng-click="orderBy('nom')">Nom</th>
+                <th class="clicable" ng-click="orderBy('name')">Prenom</th>
+                <th class="clicable" ng-click="orderBy('age')">Age</th>
+                <th class="clicable" ng-click="orderBy('work')">Entreprise</th>
+            </thead>
+            <tr ng-repeat="client in clients | filter:{name:search} | filter:{work:searchWork} | orderBy:getOrder()" ng-class="plusJeune(client.age)">
+                <td ng-class="myClass">
+                    {{client.nom}}
+                </td>
+                <td ng-class="myClass">
+                    {{client.name}}
+                </td>
+                <td>
+                    {{ client.age}} ans
+                </td>
+                <td>
+                    {{ client.work}}
+                </td>
+            </tr>
+        </table>
+
+        <!-- <input type="button" ng-click="plusJeune();" ng-init="count=1" value="plusJeune"> -->
+    </div>
+
+    <script src="./vendor/js/angular.min.js"></script>
+    <script src="./app/app.js"></script>
+</body>
+
+</html>

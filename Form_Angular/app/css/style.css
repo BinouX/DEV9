@@ -1,0 +1,14 @@
+.class1 {
+  color : pink;
+  font-weight: bold;
+}
+
+.class2{
+  color: red;
+  font-style: oblique;
+  background-color: purple;
+}
+
+.clicable{
+  cursor: pointer;
+}
