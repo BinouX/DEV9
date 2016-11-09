@@ -27,8 +27,12 @@ angular.module("testApp")
         active: true
     });
 
-angular.module("testApp").controller("testController", function($scope, $rootScope, clientFactory) {
+angular.module("testApp").controller("testController", function($http, $scope, $rootScope, clientFactory) {
+        $http.get("http://localhost:4000/clients").then(function(clients) {
+            $scope.clients = clients.data;
+        });
         $scope.titre = "Formation Angular"
+        $scope.lorem = clientFactory.getLorem();
         $scope.client = {
             name: '',
             nom: '',
@@ -36,6 +40,8 @@ angular.module("testApp").controller("testController", function($scope, $rootSco
             work: '',
             img: 'mystere'
         };
+
+
         // $rootScope.clients = [{
         //     name: 'Binoux',
         //     nom: 'Liebaert',
@@ -62,9 +68,9 @@ angular.module("testApp").controller("testController", function($scope, $rootSco
         //     img: 'quinn'
         // }];
 
-        $scope.clients = clientFactory.getClients();
+        // $scope.clients = clientFactory.getClients();
 
-        var youngest = $scope.clients[0].age;
+        var youngest = clientFactory.getAll().age;
         var getYoungest = function() {
             $scope.clients.forEach(function(client) {
                 if (youngest > client.age) {
@@ -203,7 +209,7 @@ angular.module("testApp").controller("testController", function($scope, $rootSco
             return isVisible;
         };
     })
-    .controller("clientController", function($scope, $routeParams, clientFactory, $interval) {
+    .controller("clientController", function($scope, $routeParams, clientFactory, $interval, testService) {
         var ival = 0;
         var client = clientFactory.getClientByName($routeParams);
         var otherClient = clientFactory.getOtherClientByName($routeParams)
@@ -220,4 +226,5 @@ angular.module("testApp").controller("testController", function($scope, $rootSco
         }, 2000);
         $scope.otherClient = clientFactory.getClients();
         $scope.client = client;
+        console.log(testService.getPlayers());
     });

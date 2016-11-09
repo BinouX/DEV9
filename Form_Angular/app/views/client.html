@@ -34,7 +34,7 @@
                     <img class="clientImage" ng-src="app/css/img/{{client.img}}.jpg" alt="" />
                 </td>
                 <td>
-                    <div>{{client.nom}}</div>
+                    <div>{{client.nom | capitalize}}</div>
                     <!-- <div ng-hide="getShowUpdateClient()">{{client.nom}}</div> -->
                     <!-- <input ng-show="getShowUpdateClient()" type="text" placeholder={{client.nom}}> -->
                 </td>
@@ -59,6 +59,6 @@
 
         </tr>
     </table>
-
+    <div class="bonjourTest" style="color:white">{{lorem | ellipse:true:100}}</div>
     <!-- <input type="button" ng-click="plusJeune();" ng-init="count=1" value="plusJeune"> -->
 </div>
