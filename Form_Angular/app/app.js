@@ -19,9 +19,15 @@ angular.module("testApp").config(function($routeProvider) {
         });
 });
 
-angular.module("testApp").constant("AUTHOR", "Picitime");
+angular.module("testApp")
+    .constant("AUTHOR", "Picitime")
+    .constant("SETTINGS", {
+        version: 1,
+        email: "test@test.de",
+        active: true
+    });
 
-angular.module("testApp").controller("testController", function($scope, $rootScope) {
+angular.module("testApp").controller("testController", function($scope, $rootScope, clientFactory) {
         $scope.titre = "Formation Angular"
         $scope.client = {
             name: '',
@@ -30,31 +36,34 @@ angular.module("testApp").controller("testController", function($scope, $rootSco
             work: '',
             img: 'mystere'
         };
-        $rootScope.clients = [{
-            name: 'Binoux',
-            nom: 'Liebaert',
-            age: 22,
-            work: 'Pictime',
-            img: 'joker'
-        }, {
-            name: 'Alexis',
-            nom: 'Verquin',
-            age: 27,
-            work: 'Coreye',
-            img: 'batman'
-        }, {
-            name: 'Valentin',
-            nom: 'Liebaert',
-            age: 20,
-            work: 'IIID',
-            img: 'pingouin'
-        }, {
-            name: 'Lorinne',
-            nom: 'Timothee',
-            age: 25,
-            work: 'Capgemini',
-            img: 'quinn'
-        }];
+        // $rootScope.clients = [{
+        //     name: 'Binoux',
+        //     nom: 'Liebaert',
+        //     age: 22,
+        //     work: 'Pictime',
+        //     img: 'joker'
+        // }, {
+        //     name: 'Alexis',
+        //     nom: 'Verquin',
+        //     age: 27,
+        //     work: 'Coreye',
+        //     img: 'batman'
+        // }, {
+        //     name: 'Valentin',
+        //     nom: 'Liebaert',
+        //     age: 20,
+        //     work: 'IIID',
+        //     img: 'pingouin'
+        // }, {
+        //     name: 'Lorinne',
+        //     nom: 'Timothee',
+        //     age: 25,
+        //     work: 'Capgemini',
+        //     img: 'quinn'
+        // }];
+
+        $scope.clients = clientFactory.getClients();
+
         var youngest = $scope.clients[0].age;
         var getYoungest = function() {
             $scope.clients.forEach(function(client) {
@@ -194,7 +203,21 @@ angular.module("testApp").controller("testController", function($scope, $rootSco
             return isVisible;
         };
     })
-    .controller("clientController", function($scope, $routeParams, $rootScope, AUTHOR) {
-      $scope.auteur = AUTHOR;
-      $scope.client = $routeParams;
+    .controller("clientController", function($scope, $routeParams, clientFactory, $interval) {
+        var ival = 0;
+        var client = clientFactory.getClientByName($routeParams);
+        var otherClient = clientFactory.getOtherClientByName($routeParams)
+        slideShow = function(ii) {
+            $scope.iImg = client.imgMultiple[ii];
+        };
+
+        $interval(function() {
+            if (ival === client.imgMultiple.length) {
+                ival = 0;
+            }
+            slideShow(ival);
+            ival++;
+        }, 2000);
+        $scope.otherClient = clientFactory.getClients();
+        $scope.client = client;
     });

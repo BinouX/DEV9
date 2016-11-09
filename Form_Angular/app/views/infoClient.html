@@ -1,2 +1,8 @@
-<div>Je suis {{client.name}}</div>
-<div>{{auteur}}</div>
+<div>Je suis {{client.name}} {{client.nom}}</div>
+<div>je travaille à {{client.work}}</div>
+<div ng-repeat="otherC in otherClient" ng-hide="client.name === otherC.name || client.work === other.work">
+    <a class="btn btn-primary btn-xs" href="#/client/{{otherC.name}}">{{otherC.name}}</a>
+</div>
+<div>
+    <img ng-src="./app/css/img/{{iImg}}.jpg" />
+</div>
