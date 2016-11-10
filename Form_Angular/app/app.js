@@ -48,7 +48,8 @@ angular.module("testApp").controller("testController", function($http, $scope, $
             nom: '',
             age: '',
             work: '',
-            img: 'mystere'
+            img: 'mystere',
+            imgMultiple: []
         };
 
         if (!workFactory.isDataLoadedWorks()) {
@@ -151,8 +152,11 @@ angular.module("testApp").controller("testController", function($http, $scope, $
                 return;
             }
             isDisable = true;
-            $scope.clients.push($scope.client);
-            $scope.client = {};
+            clientFactory.addClient($scope.client).then(function(res) {
+                // workFactory.addWork($scope.client.work);
+                $scope.clients.push($scope.client);
+                $scope.client = {};
+            });
         };
 
         $scope.isDisable = function() {

@@ -1,6 +1,7 @@
 var http = require('http');
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 var clients = [{
     name: 'Binoux',
@@ -52,12 +53,24 @@ var clients = [{
     ]
 }];
 
-var works = [{work: "Pictime"},{work: "IID"},{work: "Coreye"},{work: "Capgemini"},{work: "IBM"}]
+var works = [{
+    work: "Pictime"
+}, {
+    work: "IID"
+}, {
+    work: "Coreye"
+}, {
+    work: "Capgemini"
+}, {
+    work: "IBM"
+}]
+
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
 app.get('/test', function(req, res) {
@@ -68,8 +81,18 @@ app.get('/clients', function(req, res) {
     res.json(clients);
 });
 
-app.get('/work', function(req, res){
-  res.json(works)
+app.post('/clients', function(req, res) {
+    clients.push(req.body);
+    res.sendStatus(200);
+});
+
+app.get('/work', function(req, res) {
+    res.json(works)
+});
+
+app.post('/work', function(req, res) {
+    works.push(req.body);
+    res.sendStatus(200);
 });
 
 app.listen(4000, function() {

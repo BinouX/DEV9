@@ -19,5 +19,9 @@ angular.module("testApp")
             return works;
         };
 
+        workFacto.addWork = function(work){
+          return $http.post("http://localhost:4000/work", work);
+        };
+
         return workFacto;
     });

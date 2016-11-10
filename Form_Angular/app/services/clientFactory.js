@@ -91,7 +91,11 @@ angular.module("testApp")
 
         factory.getLorem = function() {
             return lorem;
-        }
+        };
+
+        factory.addClient = function(client){
+          return $http.post("http://localhost:4000/clients", client)
+        };
 
         return factory;
     });
