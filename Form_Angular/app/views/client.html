@@ -1,10 +1,10 @@
 <div>
     <h1>{{titre}}</h1>
     <input type="text" ng-model="search"> Nombre de résultat : {{clientsFiltered.length}} / {{clients.length}}
-    <!-- <select ng-model="searchWork"> -->
-    <!-- <option></option> -->
-    <!-- <option ng-repeat="client in clients | orderBy:'work'">{{ client.work }}</option> -->
-    <!-- </select> -->
+    <select ng-model="searchWork">
+    <option></option>
+    <option ng-repeat="work in works | orderBy:'work'">{{ work.work }}</option>
+    </select>
     <div ng-controller="addClientController">
         <button class="btn btn-primary" ng-click="showHideClient();">Ajout Client</button>
         <div ng-show="getVisible()">

@@ -27,10 +27,20 @@ angular.module("testApp")
         active: true
     });
 
-angular.module("testApp").controller("testController", function($http, $scope, $rootScope, clientFactory) {
-        $http.get("http://localhost:4000/clients").then(function(clients) {
+angular.module("testApp").controller("testController", function($http, $scope, $rootScope, clientFactory, workFactory) {
+        // $http.get("http://localhost:4000/clients").then(function(clients) {
+        //     $scope.clients = clients.data;
+        // });
+        clientFactory.getAll().then(function(clients) {
             $scope.clients = clients.data;
+            clientFactory.setClients(clients.data);
         });
+
+        workFactory.getWorksAll().then(function(works) {
+            $scope.works = works.data;
+            workFactory.setWorks(works.data);
+        });
+
         $scope.titre = "Formation Angular"
         $scope.lorem = clientFactory.getLorem();
         $scope.client = {
@@ -40,6 +50,15 @@ angular.module("testApp").controller("testController", function($http, $scope, $
             work: '',
             img: 'mystere'
         };
+
+        if (!workFactory.isDataLoadedWorks()) {
+            workFactory.getWorksAll().then(function(works) {
+                workFactory.setWorks(works.data);
+                $scope.works = works.data;
+            });
+        } else {
+            $scope.works = works.data;
+        }
 
 
         // $rootScope.clients = [{
@@ -210,21 +229,32 @@ angular.module("testApp").controller("testController", function($http, $scope, $
         };
     })
     .controller("clientController", function($scope, $routeParams, clientFactory, $interval, testService) {
-        var ival = 0;
-        var client = clientFactory.getClientByName($routeParams);
-        var otherClient = clientFactory.getOtherClientByName($routeParams)
-        slideShow = function(ii) {
-            $scope.iImg = client.imgMultiple[ii];
-        };
+        if (!clientFactory.isDataLoaded()) {
+            clientFactory.getAll().then(function(clients) {
+                clientFactory.setClients(clients.data);
+                displayClient();
+            });
+        } else {
+            displayClient();
+        }
 
-        $interval(function() {
-            if (ival === client.imgMultiple.length) {
-                ival = 0;
-            }
-            slideShow(ival);
-            ival++;
-        }, 2000);
-        $scope.otherClient = clientFactory.getClients();
-        $scope.client = client;
-        console.log(testService.getPlayers());
+        function displayClient() {
+            var ival = 0;
+            var client = clientFactory.getClientByName($routeParams);
+            var otherClient = clientFactory.getOtherClientByName($routeParams)
+
+            slideShow = function(ii) {
+                $scope.iImg = client.imgMultiple[ii];
+            };
+
+            $interval(function() {
+                if (ival === client.imgMultiple.length) {
+                    ival = 0;
+                }
+                slideShow(ival);
+                ival++;
+            }, 2000);
+            $scope.otherClient = clientFactory.getClients();
+            $scope.client = client;
+        }
     });

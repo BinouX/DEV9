@@ -4,6 +4,16 @@ angular.module("testApp")
         // $http.get("http://localhost:4000/clients").then(function(clients) {
         //     $scope.clients = clients.data;
         // });
+        var clients = null;
+
+        factory.isDataLoaded = function() {
+            return (clients === null) ? false : true;
+        };
+
+        factory.setClients = function(data){
+          clients = data;
+        };
+
         factory.getAll = function() {
                 return $http.get("http://localhost:4000/clients");
             }
