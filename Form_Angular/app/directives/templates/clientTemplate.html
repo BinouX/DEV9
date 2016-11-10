@@ -1,5 +1,7 @@
 <h3>Client {{message}}</h3>
-<p>Nom de famille:{{data.lastname}}</p>
+<p>Nom de famille:{{data.nom}}</p>
 <p>Prenom:{{data.name}}</p>
 <p>Age:{{data.age}}</p>
-<button type="button"class="btn btn-primary" ng-click="displayMessage(data.lastname)">Bongour</button>
+<img class="" ng-src="app/css/img/{{data.img}}.jpg" ng-hide="hideImage()" />
+<button ng-hide="hideImage()" type="button"class="btn btn-primary" ng-click="hideImg()">Masquer Image</button>
+<button ng-show="hideImage()" type="button"class="btn btn-primary" ng-click="hideImg()">Afficher Image</button>

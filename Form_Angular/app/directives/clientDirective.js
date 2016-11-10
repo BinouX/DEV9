@@ -7,10 +7,18 @@ angular.module("testApp")
                 message: "@",
                 data: '='
             },
+            controller : function($scope){
+              var hideImage = false;
+              // element.text("Bongour");
+              $scope.hideImg = function() {
+                  hideImage = !hideImage;
+              };
+              $scope.hideImage = function() {
+                  return hideImage;
+              };
+            },
             link: function(scope, element, attribut) {
-                scope.displayMessage = function(bongour){
-                  console.log(bongour);
-                }
+              element.find('p').css('color', 'pink');
             }
         };
     })

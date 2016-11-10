@@ -1,0 +1,35 @@
+<div>
+    <h1>{{titre}}</h1>
+    Nombre de résultat : {{carsFilter.length}} / {{cars.length}}
+    <div>
+        Recherche par année :
+        <select ng-model="searchYear">
+          <option></option>
+          <option ng-repeat="car in cars | orderBy:'year' | unique:'year' ">{{ car.year }}</option>
+        </select>
+    </div>
+    <div>
+      Recherche par note:
+      <select ng-model="searchStars">
+        <option></option>
+        <option ng-repeat="car in cars | orderBy:'stars'">{{ car.stars }}</option>
+      </select>
+    </div>
+    <table>
+        <th></th>
+        <th>Nom</th>
+        <th>Siege</th>
+        <th>Annee</th>
+        <th>Note</th>
+        <tr ng-repeat="car in carsFilter = (cars | filter:searchYear) | orderBy:'name'">
+            <td>
+              <img src="app/css/img/{{car.id}}.jpg"></img>
+            </td>
+            <td> <a href="#/cars/{{car.id}}">{{car.name}}</a></td>
+            <td>{{car.seats}}</td>
+            <td>{{car.year}}</td>
+            <td>{{car.stars}}</td>
+        </tr>
+    </table>
+
+</div>

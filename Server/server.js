@@ -87,7 +87,7 @@ app.post('/clients', function(req, res) {
 });
 
 app.get('/work', function(req, res) {
-    res.json(works)
+    res.json(works);
 });
 
 app.post('/work', function(req, res) {

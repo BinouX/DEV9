@@ -17,55 +17,6 @@ angular.module("testApp")
         factory.getAll = function() {
                 return $http.get("http://localhost:4000/clients");
             }
-            // var clients = [{
-            //     name: 'Binoux',
-            //     nom: 'Liebaert the-god-blalblalba c\'est marrant ',
-            //     age: 22,
-            //     work: 'Pictime',
-            //     img: 'joker',
-            //     imgMultiple :[
-            //       'joker',
-            //       'batman',
-            //       'mystere',
-            //       'pingouin'
-            //     ]
-            // }, {
-            //     name: 'alexis',
-            //     nom: 'verquin',
-            //     age: 27,
-            //     work: 'Coreye',
-            //     img: 'batman',
-            //     imgMultiple :[
-            //       'joker',
-            //       'batman',
-            //       'mystere',
-            //       'pingouin'
-            //     ]
-            // }, {
-            //     name: 'valentin',
-            //     nom: 'liebaert',
-            //     age: 20,
-            //     work: 'IIID',
-            //     img: 'pingouin',
-            //     imgMultiple :[
-            //       'joker',
-            //       'batman',
-            //       'mystere',
-            //       'pingouin'
-            //     ]
-            // }, {
-            //     name: 'Lorinne',
-            //     nom: 'Timothee',
-            //     age: 25,
-            //     work: 'Capgemini',
-            //     img: 'quinn',
-            //     imgMultiple :[
-            //       'joker',
-            //       'batman',
-            //       'mystere',
-            //       'pingouin'
-            //     ]
-            // }];
 
         var lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
         factory.getClients = function() {
