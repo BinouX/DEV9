@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST-FILENAME} !-d
+RewriteCond %{REQUEST-FILENAME} !-f
+
+RewriteRule ^index/(.*)/(.*)/(.*)/(.*)/(.*)$ include/placeholder.php?width=$1&heigth=$2&red=$3&green=$4&blue=$5 [L]

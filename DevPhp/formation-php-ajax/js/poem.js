@@ -1,7 +1,27 @@
+var app = {
+    var urlServer = "http://127.0.0.1/formation-php-ajax/client/";
+}
+
 $(document).ready(function() {
-    var url = "http://127.0.0.1/formation-php-ajax/client/poem-lsit.php";
+    console.log("bonjour");
+    loadPoems();
+    $('#sendAjax').on('click', function() {
+        $.ajax({
+            url: app.urlServer + "poem-add.php",
+            method: 'POST',
+            data: {
+                message: 'VI saluto!'
+            },
+            success: function(res) {},
+            error: function() {}
+        })
+    })
+});
+
+
+$(document).ready(function() {
     $.ajax({
-        url: url,
+        url: app.urlServer + "poem-lsit.php",
         method: 'GET',
         success: function(res) {
             var poems = JSON.parse(res);

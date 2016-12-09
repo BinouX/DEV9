@@ -1,0 +1,75 @@
+/*.terrain {
+    background: url('./img/football-pitch.png') no-repeat;
+    width: 800px;
+    height: 507px;
+}
+
+
+.pannel{
+  float: left;
+  display: flex;
+}
+
+.joueur{
+  height: 10%;
+  width: 10%;
+}
+
+#draggable{
+  margin-top: -10px;
+  background-color: red;
+}
+
+.terrain p{
+  width: 20%;
+}*/
+
+#container{
+  position: relative;
+}
+
+#pitch{
+  background: url('./img/football-pitch.png');
+  width: 800px;
+  height: 507px;
+  float: left;
+  left: 120px;
+  position: absolute;
+}
+
+#players{
+  width: : 800px;
+  height: 507px;
+  float: left;
+  position: absolute;
+  z-index: 5;
+}
+
+.player{
+  width: : 100px;
+  height: 28px;
+  margin-top: 2px 0 ;
+  padding: 4px;
+  cursor: move;
+}
+
+.col1, .col2{
+  float: left;
+  width: 50%
+}
+
+.clear{
+  clear: both
+}
+
+#commands{
+  height: 160px;
+}
+
+.good {
+  background-color : red;
+}
+
+.compo{
+  
+}

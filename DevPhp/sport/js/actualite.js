@@ -10,7 +10,10 @@ $(document).ready(function() {
     var maxParPage = 10;
     var min = page * maxParPage;
     var max = page * maxParPage + maxParPage;
-
+    var $prev = $('a.prev');
+    var $next = $('a.next');
+    var $maxPage = $('span.maxPage');
+    var $currentPage = $('span.currentPage');
     $.ajax({
         url: url,
         method: 'GET',
@@ -21,33 +24,26 @@ $(document).ready(function() {
                 url: url2,
                 method: 'GET',
                 success: function(res) {
-                    $('span.maxPage').append(Math.ceil(res.length / maxParPage));
+                    $maxPage.append(Math.ceil(res.length / maxParPage));
                     if ((page + 1) == (Math.ceil(res.length / maxParPage))) {
-                        $('a.next').hide();
+                        $next.hide();
                     } else {
-                        $('a.next').show();
+                        $next.show();
                     }
                 }
             });
 
 
             var actuChronos = JSON.parse(res);
-            // $('body').append("<table border='1px solid black'><th>CHRONO</th>");
             actuChronos.forEach(function(actuChrono) {
-                // $('body').append("<tr>" +
-                //     "<td>" + actuChrono[3] + "</td>" +
-                //     "<td>" + actuChrono[2] + "</td>" +
-                //     "<td>" + actuChrono[0] + "</td>" +
-                //     "</tr>");
                 displayArticles(actuChrono);
             });
             if ((page + 1) == 1) {
-                $('a.prev').hide();
+                $prev.hide();
             } else {
-                $('a.prev').show();
+                $prev.show();
             }
-            $('span.currentPage').append(page + 1);
-            // $('body').append("</table>");
+            $currentPage.append(page + 1);
         },
         error: function() {
             console.log("ERROR");
